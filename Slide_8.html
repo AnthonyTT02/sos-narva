@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --red: #d62828;
+      --gray-box: #f0f0f0;
+      --phone-bg: #ffffff;
+      --page-bg: #f8f9fa;
+      --text: #111;
+      --green: #1db954;
+    }
+
+    html, body {
+      margin: 0;
+      background: var(--page-bg);
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      overflow-x: hidden; 
+    }
+
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      z-index: 9998;
+    }
+    .overlay.active {
+      display: block;
+    }
+
+    
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%; 
+      width: 260px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.25);
+      padding: 20px;
+      transition: 0.3s;
+      z-index: 9999;
+    }
+    .sidebar.active {
+      right: 0;
+    }
+    .sidebar a {
+      display: block;
+      padding: 8px 0;
+      font-size: 16px;
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .submenu {
+      padding-left: 10px;
+    }
+
+    
+    .menu-icon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 26px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+    .menu-icon span {
+      display: block;
+      height: 3px;
+      background: #000;
+      margin: 6px 0;
+      border-radius: 3px;
+    }
+
+    
+    .phone-wrapper {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    .phone {
+      width: 100%;
+      padding: 20px;
+      background: var(--phone-bg);
+      border-radius: 28px;
+      min-height: calc(100vh - 36px);
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box; 
+    }
+
+    .title {
+      margin: 8px 0 18px 0;
+      font-weight: 700;
+      color: var(--red);
+      font-size: 20px;
+    }
+
+    .info {
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 18px;
+      word-break: break-word;
+    }
+    .info b { font-size: 16px; }
+
+    .company {
+      background: var(--gray-box);
+      border-radius: 12px;
+      padding: 14px 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .company .name {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    
+    .phone-link {
+      color: #007aff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+   
+    .call-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .call-button img {
+      width: 20px;
+      margin-right: 10px;
+    }
+    .call-button:active {
+      transform: translateY(1px);
+    }
+
+  </style>
+</head>
+<body>
+
+
+<div class="overlay" id="overlay"></div>
+
+
+<div class="sidebar" id="sidebar">
+  <a>Авторизация поставщика услуг</a>
+  <a>Личный кабинет</a>
+  <a>Настройки</a>
+  <a>Условия пользования</a>
+  <a>Правила безопасности</a>
+  <a>Как начать работать с платформой</a>
+  <div class="submenu">
+    <a>- для юр. лиц</a>
+    <a>- для физ.лиц</a>
+  </div>
+  <a>Контакты</a>
+</div>
+
+<div class="phone-wrapper">
+  <div class="phone">
+
+    
+    <div class="menu-icon" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="title">SOS NARVA</div>
+
+    <div class="info">
+      <b>Volvo X70 &nbsp; 123 ADC</b><br>
+      Эвакуатор<br>
+      Местоположение: Kerese tn. 32, Narva, Estonia<br>
+      Страховой полис: 454545454545454545 PFZ<br>
+      Оплата картой: Master ********4330
+    </div>
+
+    
+    <div class="company">
+      <div class="name">Фирма 3</div>
+
+      на месте: через 10 мин<br>
+      Стоимость: 27 евро<br><br>
+
+      <b>Эвакуатор:</b> VOLVO 2,8 071 GHL<br>
+      <b>Водитель:</b> Valdek rus / est<br>
+
+      <a class="phone-link" href="tel:+3725296507">+3725296508</a>
+
+      <a class="call-button" href="tel:+3725296507">
+        📞 Позвонить
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+
+  function toggleMenu() {
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+
+  menuBtn.onclick = toggleMenu;
+  overlay.onclick = toggleMenu;
+</script>
+
+</body>
+</html>

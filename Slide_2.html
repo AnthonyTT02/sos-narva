@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background:#f8f9fa; }
+    .phone { max-width: 360px; margin: auto; padding: 20px; background: white; border-radius: 28px; min-height: 100vh; position: relative; }
+
+    
+    .menu-icon1 {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 28px;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    .menu-icon1 span {
+      display: block;
+      height: 3px;
+      background: #000;
+      margin: 6px 0;
+      border-radius: 3px;
+    }
+
+    .logo { color:#d62828; font-weight: 900; letter-spacing: 1px; }
+
+    input, select { border: 1.5px solid #999; border-radius: 10px; padding: 10px; font-size: 14px; }
+    label { font-size: 13px; color: #444; margin-bottom: 4px; }
+
+    .check-line { display:flex; align-items:center; gap:8px; margin: 15px 0; color:#555; }
+    .check-line input { width: 20px; height: 20px; appearance:none; border:2px solid #7d7dff; border-radius:5px; cursor:pointer; }
+    .check-line input:checked { background:#7d7dff; border-color:#7d7dff; }
+    .check-line input:checked::after {
+      content:''; position:absolute;
+      width:5px; height:10px;
+      border:solid white; border-width:0 2px 2px 0;
+      transform:translate(6px,2px) rotate(45deg);
+    }
+
+    select {
+      background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><polygon points="4,6 12,6 8,11" fill="red"/></svg>');
+      background-repeat:no-repeat;
+      background-position:right 12px center;
+      color:#555;
+    }
+
+    .location-block { font-size: 14px; margin: 10px 0 20px; }
+    .loc-icon { color: #d62828; font-size: 20px; }
+
+    
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100%;
+      background: white;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+      padding: 25px;
+      transition: 0.35s;
+      z-index: 1000;
+    }
+
+    .side-menu.active { right: 0; }
+
+    .menu-overlay {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+      display:none;
+      z-index: 900;
+    }
+
+    .menu-overlay.show { display:block; }
+
+    .side-menu a {
+      display:block;
+      font-size: 16px;
+      color:#000;
+      margin-bottom: 14px;
+      text-decoration:none;
+    }
+
+    .submenu { margin-left: 15px; margin-top: -8px; }
+    .submenu a { font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+
+  
+  <div class="menu-icon1" onclick="openMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <h4 class="mb-4 fw-bold" style="color: red;">SOS Narva</h4>
+
+  
+  <label>Марка автомобиля</label>
+  <input class="form-control mb-3" value="Volvo">
+
+  
+  <label>Модель</label>
+  <input class="form-control mb-3" value="X70">
+
+  
+  <label>Регистрационный номер</label>
+  <input class="form-control mb-3" value="123 ADC">
+
+  
+  <div class="location-block">
+    <div class="d-flex align-items-center mb-4 justify-content-end">
+      <span class="loc-icon">🗺️</span>
+      <span class="fw-semibold ms-5 text-end">
+        Таллиннское шоссе 32,<br>
+        Нарва, Эстония.
+      </span>
+    </div>
+    <div class="text-center">
+      <a href="#">Выбрать место на карте</a>
+    </div>
+  </div>
+
+  
+  <label class="check-line">
+    <input type="checkbox" /> Подтвердите ваше местоположение
+  </label>
+
+  
+  <label for="payment" style="position: relative; display: block;">
+    <img src="img/credit-card.svg" alt="card" style="
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      width: 20px;">
+    <select id="payment" class="form-control mb-4" style="padding-left: 35px;" onchange="goPay(this)">
+      <option disabled selected>Способ оплаты</option>
+      <option value="registration.html">Оплата на месте наличными (+15%)</option>
+      <option value="registration.html">Оплата на месте картой (-10%)</option>
+      <option value="registration.html">Оплата на подписке (-25%)</option>
+    </select>
+  </label>
+
+</div>
+
+
+<div class="menu-overlay" onclick="closeMenu()"></div>
+
+<div class="side-menu" id="sideMenu">
+  <a>Авторизая поставщика услуг</a>
+  <a>Личный кабинет</a>
+  <a>Настройки</a>
+  <a>Условия пользования</a>
+  <a>Правила безопасности</a>
+  <a>Как начать работать с платформой</a>
+  <div class="submenu">
+    <a>- для юр. лиц</a>
+    <a>- для физ. лиц</a>
+  </div>
+  <a>Контакты</a>
+</div>
+
+<script>
+  function openMenu() {
+    document.getElementById("sideMenu").classList.add("active");
+    document.querySelector(".menu-overlay").classList.add("show");
+  }
+
+  function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("active");
+    document.querySelector(".menu-overlay").classList.remove("show");
+  }
+
+  function goPay(select) {
+    if (select.value) location.href = select.value;
+  }
+</script>
+
+</body>
+</html>
+
+

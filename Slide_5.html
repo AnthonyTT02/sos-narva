@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva — экран с фирмами</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    
+    :root {
+      --red: #d62828;
+      --gray-box: #f0f0f0;
+      --phone-bg: #ffffff;
+      --page-bg: #f8f9fa;
+      --text: #111;
+    }
+    html,body {
+      height: 100%;
+      margin: 0;
+      background: var(--page-bg);
+      font-family: Arial, sans-serif;
+      color: var(--text);
+    }
+
+    
+    .phone {
+      max-width: 360px;
+      margin: 18px auto;
+      padding: 20px;
+      background: var(--phone-bg);
+      border-radius: 28px;
+      min-height: calc(100vh - 36px);
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      overflow: auto; 
+      -webkit-overflow-scrolling: touch;
+    }
+
+    
+    .menu-icon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 26px;
+      cursor: pointer;
+      z-index: 10001; 
+    }
+    .menu-icon span {
+      display: block;
+      height: 3px;
+      background: #000;
+      margin: 6px 0;
+      border-radius: 3px;
+    }
+
+    
+    .title {
+      margin: 8px 0 18px 0;
+      font-weight: 700;
+      color: var(--red);
+      font-size: 20px;
+    }
+
+    
+    .info {
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 18px;
+      word-break: break-word;
+    }
+    .info b { font-size: 16px; }
+
+    
+    .company {
+      background: var(--gray-box);
+      border-radius: 12px;
+      padding: 14px 12px;
+      margin-bottom: 16px;
+    }
+    .company .name {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .company .meta {
+      font-size: 14px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    
+    .confirm {
+      display: block;
+      width: 100%;
+      border: none;
+      background: var(--red);
+      color: #fff;
+      padding: 11px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .confirm:active { transform: translateY(1px); }
+
+    
+    @media (max-height: 520px) {
+      .phone { padding: 14px; }
+      .title { margin-bottom: 12px; font-size: 18px; }
+      .company { padding: 12px; }
+      .confirm { padding: 10px; font-size: 14px; }
+    }
+
+    
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -260px; 
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      transition: 0.35s;
+      z-index: 10000;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px 0;
+      font-size: 15px;
+      color: #111;
+      text-decoration: none;
+    }
+
+    .submenu a {
+      padding-right: 15px;
+      font-size: 14px;
+      color: #444;
+      display: block;
+    }
+
+    .sidebar.open {
+      right: 0; 
+    }
+
+    
+    @media (max-width: 600px) {
+      .phone { margin-left: 12px; margin-right: 12px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  
+  <div class="sidebar" id="sidebar">
+    <a>Авторизая поставщика услуг</a>
+    <a>Личный кабинет</a>
+    <a>Настройки</a>
+    <a>Условия пользования</a>
+    <a>Правила безопасности</a>
+    <a>Как начать работать с платформой</a>
+
+    <div class="submenu">
+      <a>- для юр. лиц</a>
+      <a>- для физ. лиц</a>
+    </div>
+
+    <a>Контакты</a>
+  </div>
+
+  <div class="phone">
+    
+    <div class="menu-icon" id="menuBtn" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="title">SOS NARVA</div>
+
+    
+    <div class="info">
+      <div><b>Volvo X70 &nbsp; 123 ADC</b></div>
+      <div>Эвакуатор</div>
+      <div>Местоположение: Kerese tn. 32, Narva, Estonia</div>
+      <div>Страховой полис: 454545454545454545 PFZ</div>
+      <div>Оплата картой: Master ********4330</div>
+    </div>
+
+    
+<div class="company" role="group" aria-label="Фирма 1">
+    <div class="name">Фирма 1</div>
+    <div class="meta"> на месте: через 20 мин<br> Стоимость: 25 евро </div>
+    <button class="confirm" onclick="window.location.href='Slide_6.html'">Подтвердить</button>
+</div>
+
+<div class="company" role="group" aria-label="Фирма 2">
+    <div class="name">Фирма 2</div>
+    <div class="meta"> на месте: через 25 мин<br> Стоимость: 30 евро </div>
+    <button class="confirm" onclick="window.location.href='Slide_7.html'">Подтвердить</button>
+</div>
+
+<div class="company" role="group" aria-label="Фирма 3">
+    <div class="name">Фирма 3</div>
+    <div class="meta"> на месте: через 10 мин<br> Стоимость: 27 евро </div>
+    <button class="confirm" onclick="window.location.href='Slide_8.html'">Подтвердить</button>
+</div>
+
+    
+    <div style="height:28px"></div>
+  </div>
+
+  <script>
+    
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    menuBtn.onclick = () => {
+      sidebar.classList.toggle("open");
+    };
+  </script>
+
+</body>
+</html>
