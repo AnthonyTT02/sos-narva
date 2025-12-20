@@ -99,10 +99,11 @@
   document.getElementById("emailLine").textContent = owner.email || "—";
 
   
-  const payment = JSON.parse(localStorage.getItem("providerPayment") || "{}");
-  const digits = (payment.cardNumber || "").replace(/\D/g, "");
-  const last4 = digits.length >= 4 ? digits.slice(-4) : "----";
-  document.getElementById("cardLine").textContent = `Карта Master ****${last4}`;
+  const payment = JSON.parse(localStorage.getItem("providerPaymentSafe") || "{}");
+const brand = payment.brand || "Карта";
+const last4 = payment.last4 || "----";
+document.getElementById("cardLine").textContent = `${brand} ****${last4}`;
+
 
   document.getElementById("agreementForm").addEventListener("submit", e => {
     e.preventDefault();
