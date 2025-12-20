@@ -4,213 +4,53 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SOS Narva — фирма 3</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-<style>
-:root {
-  --red: #d62828;
-  --gray-box: #f0f0f0;
-  --phone-bg: #ffffff;
-  --page-bg: #f8f9fa;
-  --text: #111;
-  --green: #1db954;
-}
-
-html, body {
-  margin: 0;
-  background: var(--page-bg);
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  height: 100%;
-}
-
-.phone {
-  max-width: 400px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 32px;
-  padding: 20px;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-  position: relative;
-}
-
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-.header .logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--red);
-}
-
-
-.menu-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-.menu-btn:hover {
-  background: #f3f4f6;
-}
-.menu-btn svg {
-  width: 26px;
-  height: 26px;
-}
-
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: -250px;
-  width: 250px;
-  height: 100%;
-  background: #fff;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-  transition: right 0.3s ease;
-  z-index: 10;
-  padding: 20px;
-}
-.sidebar.active {
-  right: 0;
-}
-.sidebar h4 {
-  margin-bottom: 20px;
-  color: var(--red);
-}
-.sidebar a {
-  display: block;
-  padding: 10px 0;
-  color: #333;
-  text-decoration: none;
-  border-bottom: 1px solid #eee;
-}
-.sidebar a:hover {
-  background: #f3f4f6;
-}
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
-  display: none;
-  z-index: 5;
-}
-.overlay.active {
-  display: block;
-}
-
-
-.info {
-  font-size: 15px;
-  line-height: 1.45;
-  margin-bottom: 18px;
-}
-.info b { font-size: 16px; }
-
-.company {
-  background: var(--gray-box);
-  border-radius: 12px;
-  padding: 14px 12px;
-  margin-bottom: 16px;
-  font-size: 14px;
-  line-height: 1.45;
-}
-.company .name {
-  font-weight: 700;
-  margin-bottom: 6px;
-  font-size: 15px;
-}
-
-.phone-link {
-  color: #007aff;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-block;
-  margin-top: 6px;
-}
-.call-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--green);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  padding: 12px 14px;
-  margin-top: 14px;
-  font-size: 15px;
-  font-weight: 700;
-}
-.call-button img {
-  width: 20px;
-  margin-right: 10px;
-}
-.call-button:active {
-  transform: translateY(1px);
-}
-
-.field-box {
-  margin-bottom: 6px;
-}
-.field-box label {
-  font-weight: 600;
-}
-.text-value {
-  margin-left: 4px;
-  display: inline;
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="sos-page">
 
-<div class="phone">
-  <div class="header">
-    <div class="logo">SOS Narva</div>
-    <button class="menu-btn" id="menuBtn">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<div class="phone-frame">
+
+ 
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
       </svg>
     </button>
   </div>
 
-  <div class="info">
-    <b>Volvo X70 &nbsp; 123 ADC</b><br>
-    Эвакуатор<br>
-    <div class="field-box">
-      <label>Местоположение:</label>
-      <span class="text-value" id="address">Загрузка адреса...</span>
-    </div>
-    Страховой полис: 454545454545454545 PFZ<br>
-    Оплата картой: Master ********4330
+ 
+  <div class="sos-field-box">
+    <div class="text-value"><b>Volvo X70 &nbsp; 123 ADC</b></div>
+    <div class="text-value">Эвакуатор</div>
+    <div class="text-value">Местоположение: <span id="address">Загрузка адреса...</span></div>
+    <div class="text-value">Страховой полис: 454545454545454545 PFZ</div>
+    <div class="text-value">Оплата картой: Master ********4330</div>
   </div>
 
-  <div class="company">
+  
+  <div class="sos-company-card">
     <div class="name">Фирма 3</div>
-    на месте: через 10 мин<br>
-    Стоимость: 27 евро<br><br>
-    <b>Эвакуатор:</b> VOLVO 2,8 071 GHL<br>
-    <b>Водитель:</b> Valdek rus / est<br>
-    <a class="phone-link" href="tel:+3725296507">+3725296509</a>
-    <a class="call-button" href="tel:+3725296507">📞 Позвонить</a>
+    <div class="meta">
+      на месте: через 10 мин<br>
+      Стоимость: 27 евро<br>
+      <br>
+      <b>Эвакуатор:</b> VOLVO 2.8 071 GHL<br>
+      <b>Водитель:</b> Valdek rus / est
+    </div>
+    <a class=btn-sos-link>+3725296509</a> 
+    <a href="tel:+3725296507" class="call-button">
+      📞 Позвонить
+    </a>
   </div>
+
 </div>
 
 
-<div class="sidebar" id="sidebar">
+<div class="sos-sidebar" id="sidebar">
   <h4>Меню</h4>
-  <a href="#">Авторизация поставщика услуг</a>
+  <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
   <a href="#">Личный кабинет</a>
   <a href="#">Настройки</a>
   <a href="#">Условия пользования</a>
@@ -220,15 +60,13 @@ html, body {
   <a href="#">- для физ. лиц</a>
   <a href="#">Контакты</a>
 </div>
-<div class="overlay" id="overlay"></div>
+<div class="sos-overlay" id="overlay"></div>
 
 <script>
-  
   const state = JSON.parse(localStorage.getItem("orderState") || "{}");
   const addressDiv = document.getElementById("address");
   addressDiv.textContent = state.address || "Адрес не определён";
 
-  
   const menuBtn = document.getElementById("menuBtn");
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sos-page">
+
+
+<div class="sos-sidebar" id="sidebar">
+  <h4>Меню</h4>
+  <a href="Provider_Reg_1.html">Авторизация поставщика услуг</a>
+  <a href="#">Личный кабинет</a>
+  <a href="#">Настройки</a>
+  <a href="#">Условия пользования</a>
+  <a href="#">Правила безопасности</a>
+  <a href="#">Как начать работать</a>
+  <a href="#">— для юр. лиц</a>
+  <a href="#">— для физ. лиц</a>
+  <a href="#">Контакты</a>
+</div>
+<div class="sos-overlay" id="overlay"></div>
+
+<div class="phone-frame">
+
+  
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 12h16M4 18h6"/>
+      </svg>
+    </button>
+  </div>
+  
+  <p class="sos-mb-3"><b>Требуется</b></p>
+
+  <div class="sos-service-list">
+    <label class="sos-service-item">
+      <input type="checkbox">
+      Эвакуатор
+    </label>
+    <label class="sos-service-item">
+      <input type="checkbox">
+      Вскрытие авто. Замена замков
+    </label>
+    <label class="sos-service-item">
+      <input type="checkbox">
+      Замена шин, ремонт на дороге
+    </label>
+    <label class="sos-service-item">
+      <input type="checkbox">
+      Закончилось топливо
+    </label>
+    <label class="sos-service-item">
+      <input type="checkbox">
+      Поис ближайшего автосервиса
+    </label>
+  </div>
+
+  <div class="sos-check-line">
+    <input type="checkbox">
+    Разрешить доступ к геолокации
+  </div>
+
+  <button class="btn-sos-primary sos-mb-3" onclick="location.href='Slide_2.html'">
+    Подтвердить
+  </button>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const menuBtn = document.getElementById('menuBtn');
+
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva - Регистрация поставщика услуг</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sos-page">
+
+
+<div class="sos-sidebar" id="sidebar">
+  <h4>Меню</h4>
+  <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
+  <a href="#">Личный кабинет</a>
+  <a href="#">Настройки</a>
+  <a href="#">Условия пользования</a>
+  <a href="#">Правила безопасности</a>
+  <a href="#">Как начать работать</a>
+  <a href="#">— для юр. лиц</a>
+  <a href="#">— для физ. лиц</a>
+  <a href="#">Контакты</a>
+</div>
+<div class="sos-overlay" id="overlay"></div>
+
+<div class="phone-frame">
+
+  
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
+      </svg>
+    </button>
+  </div>
+
+  <form id="companyForm">
+    <div class="sos-form-group">
+      <label class="sos-form-label">Название фирмы</label>
+      <input type="text" class="sos-form-input" name="companyName" value="Multiweb OÜ" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">Регистрационный номер</label>
+      <input type="text" class="sos-form-input" name="regNumber" value="12102527" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">Номер счёта</label>
+      <input type="text" class="sos-form-input" name="accountNumber" value="Ee252200221052270573" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">IBAN</label>
+      <input type="text" class="sos-form-input" name="iban" value="Ee13101022046204543" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">KMKR</label>
+      <input type="text" class="sos-form-input" name="kmkr" placeholder="KMKR номер">
+    </div>
+
+    
+    <div class="sos-address-display">
+      <svg width="16" height="16" fill="none" stroke="#e53935" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+      <div id="currentLocation">
+        Определяем местоположение...
+      </div>
+    </div>
+
+    <button type="submit" class="btn-sos-primary">Подтвердить</button>
+  </form>
+
+</div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+
+  menuBtn.onclick = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  };
+
+  overlay.onclick = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  document.getElementById("companyForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    data.location = document.getElementById("currentLocation").innerText;
+    localStorage.setItem("providerCompany", JSON.stringify(data));
+    window.location.href = "Provider_Reg_3.html";
+  });
+
+  
+  function setLocationText(lat, lon) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18`, {
+      headers: { "User-Agent": "SOS-Narva-App" }
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("currentLocation").innerHTML = `<strong>Юридический адрес:</strong><br>${data.display_name}`;
+    })
+    .catch(() => {
+      document.getElementById("currentLocation").innerHTML = `<strong>Юридический адрес:</strong><br>${lat}, ${lon}`;
+    });
+  }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => setLocationText(pos.coords.latitude, pos.coords.longitude),
+      () => document.getElementById("currentLocation").innerText = "Не удалось определить местоположение"
+    );
+  } else {
+    document.getElementById("currentLocation").innerText = "Геолокация не поддерживается";
+  }
+</script>
+
+</body>
+</html>

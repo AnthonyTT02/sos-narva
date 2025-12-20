@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva - Регистрация поставщика услуг</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sos-page">
+
+
+<div class="sos-sidebar" id="sidebar">
+  <h4>Меню</h4>
+  <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
+  <a href="#">Личный кабинет</a>
+  <a href="#">Настройки</a>
+  <a href="#">Условия пользования</a>
+  <a href="#">Правила безопасности</a>
+  <a href="#">Как начать работать</a>
+  <a href="#">— для юр. лиц</a>
+  <a href="#">— для физ. лиц</a>
+  <a href="#">Контакты</a>
+</div>
+<div class="sos-overlay" id="overlay"></div>
+
+<div class="phone-frame">
+
+  
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="sos-company-header" id="companyHeader">Multiweb OÜ &nbsp; 12102527</div>
+  <br>
+
+  <div class="sos-form-label">Владелец</div>
+
+  <form id="ownerForm">
+    <div class="sos-form-group">
+      <input type="text" class="sos-form-input" name="ownerName" value="Белозеров Максим" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">Телефон</label>
+      <input type="tel" class="sos-form-input" name="phone" value="+3725296507" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">Mail</label>
+      <input type="email" class="sos-form-input" name="email" value="info@multiweb.ee" required>
+    </div>
+
+    <div class="sos-form-group">
+      <label class="sos-form-label">B-kaart</label>
+      <div class="sos-file-upload" onclick="document.getElementById('fileInput').click()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+        </svg>
+        <span id="fileName">Загрузите файл</span>
+      </div>
+      <input type="file" id="fileInput" style="display: none" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <button type="submit" class="btn-sos-primary">Подтвердить</button>
+  </form>
+
+</div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+
+  menuBtn.onclick = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  };
+
+  overlay.onclick = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  
+  const company = JSON.parse(localStorage.getItem("providerCompany") || "{}");
+  if (company.companyName && company.regNumber) {
+    document.getElementById("companyHeader").textContent = `${company.companyName}  ${company.regNumber}`;
+  }
+
+  
+  document.getElementById("fileInput").addEventListener("change", function(e) {
+    const fileName = e.target.files[0]?.name || "Загрузите файл";
+    document.getElementById("fileName").textContent = fileName;
+  });
+
+  document.getElementById("ownerForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+  localStorage.setItem("providerOwner", JSON.stringify(data));
+  window.location.href = "Provider_Reg_4.html";
+});
+
+</script>
+
+</body>
+</html>

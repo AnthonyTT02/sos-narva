@@ -4,382 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SOS Narva - Экстренная помощь</title>
-  <meta name="description" content="SOS Narva - приложение для экстренной помощи и медицинских услуг" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-      min-height: 100vh;
-      padding: 16px;
-    }
-
-    .phone-frame {
-      max-width: 400px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 32px;
-      padding: 20px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    }
-    
-    .sidebar {
-      position: fixed;
-      top: 0;
-      right: -250px; 
-      width: 250px;
-      height: 100%;
-      background: #fff;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-      transition: right 0.3s ease;
-      z-index: 10;
-      padding: 20px;
-    }
-    .sidebar.active {
-      right: 0;
-    }
-    .sidebar h4 {
-      margin-bottom: 20px;
-      color: #dc2626;
-    }
-    .sidebar a {
-      display: block;
-      padding: 10px 0;
-      color: #333;
-      text-decoration: none;
-      border-bottom: 1px solid #eee;
-    }
-    .sidebar a:hover {
-      background: #f3f4f6;
-    }
-
-   
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      display: none;
-      z-index: 5;
-    }
-    .overlay.active {
-      display: block;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 700;
-      color: #dc2626;
-    }
-
-    .menu-btn {
-      padding: 8px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-
-    .menu-btn:hover {
-      background: #f3f4f6;
-    }
-
-    .menu-icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #374151;
-      margin-bottom: 8px;
-    }
-
-    .required-badge {
-      font-size: 11px;
-      color: #dc2626;
-      background: #fef2f2;
-      padding: 2px 8px;
-      border-radius: 9999px;
-      font-weight: 500;
-    }
-
-    .form-input {
-      width: 100%;
-      height: 44px;
-      padding: 0 12px;
-      border: 1.5px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-
-    
-    .card-section {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .card-logos {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .card-logo {
-      width: 40px;
-      height: 26px;
-      background: white;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8px;
-      font-weight: 700;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .card-logo.visa { color: #1a1f71; }
-    .card-logo.mastercard { color: #eb001b; }
-    .card-logo.amex { color: #006fcf; }
-    .card-logo.discover { color: #ff6000; }
-    .card-logo.maestro { color: #0099df; }
-    .card-logo.diners { color: #004a97; }
-    .card-logo.jcb { color: #0e4c96; }
-    .card-logo.unionpay { color: #e21836; }
-
-    .card-number-wrapper {
-      position: relative;
-      margin-bottom: 12px;
-    }
-
-    .card-number-input {
-      width: 100%;
-      height: 48px;
-      padding: 0 44px 0 44px;
-      border: 1.5px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 2px;
-      background: white;
-    }
-
-    .card-number-input:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-
-    .card-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      color: #9ca3af;
-    }
-
-    .check-icon {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      color: #22c55e;
-      display: none;
-    }
-
-    .check-icon.visible {
-      display: block;
-    }
-
-    .card-details-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 100px;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .select-wrapper {
-      position: relative;
-    }
-
-    .form-select {
-      width: 100%;
-      height: 44px;
-      padding: 0 32px 0 12px;
-      border: 1.5px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: inherit;
-      background: white;
-      cursor: pointer;
-      appearance: none;
-    }
-
-    .form-select:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-
-    .select-arrow {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      color: #6b7280;
-    }
-
-    .cvv-wrapper {
-      position: relative;
-    }
-
-    .cvv-input {
-      width: 100%;
-      height: 44px;
-      padding: 0 36px 0 12px;
-      border: 1.5px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 4px;
-      text-align: center;
-      background: white;
-    }
-
-    .cvv-input:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-
-    .cvv-icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
-      color: #9ca3af;
-    }
-
-    .security-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 8px 12px;
-      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #166534;
-    }
-
-    .security-badge svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      height: 48px;
-      margin-top: 24px;
-      background: #dc2626;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-    }
-
-    .submit-btn:hover {
-      background: #b91c1c;
-    }
-
-    .submit-btn:active {
-      transform: scale(0.98);
-    }
-
-    
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #1f2937;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      opacity: 0;
-      transition: transform 0.3s, opacity 0.3s;
-      z-index: 1000;
-    }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="sos-page">
 
   <div class="phone-frame">
     
-    <div class="header">
-      <div class="logo">SOS Narva</div>
-      <button class="menu-btn">
-        <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="sos-header">
+      <a href="index.html" class="sos-logo">SOS Narva</a>
+      <button class="sos-menu-btn">
+        <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
         </svg>
       </button>
     </div>
-        
-    <div class="sidebar" id="sidebar">
+
+    
+    <div class="sos-sidebar" id="sidebar">
       <h4>Меню</h4>
-      <a href="#">Авторизация поставщика услуг</a>
+      <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
       <a href="#">Личный кабинет</a>
       <a href="#">Настройки</a>
       <a href="#">Условия пользования</a>
@@ -389,59 +33,52 @@
       <a href="#">- для физ. лиц</a>
       <a href="#">Контакты</a>
     </div>
-    <div class="overlay" id="overlay"></div>
-
-    
+    <div class="sos-overlay" id="overlay"></div>
 
     
     <form id="sosForm">
       
-      <div class="form-group">
-        <label class="form-label">
-          Ваше имя <span class="required-badge">обязательно</span>
-        </label>
-        <input type="text" class="form-input" value="Белозеров Максим" required>
+      <div class="sos-form-group">
+        <label class="sos-form-label">Ваше имя <span class="sos-required-badge">обязательно</span></label>
+        <input type="text" class="sos-form-input" value="Белозеров Максим" required>
       </div>
 
       
-      <div class="form-group">
-        <label class="form-label">
+      <div class="sos-form-group">
+        <label class="sos-form-label">
           <svg width="16" height="16" fill="none" stroke="red" viewBox="0 0 24 24">
             <rect x="1" y="4" width="22" height="16" rx="2" stroke-width="2"/>
             <line x1="1" y1="10" x2="23" y2="10" stroke-width="2"/>
           </svg>
-          Добавьте карту <span class="required-badge">обязательно</span>
+          Добавьте карту <span class="sos-required-badge">обязательно</span>
         </label>
-        
-        <div class="card-section">
-          
-          <div class="card-logos">
-            <div class="card-logo visa">VISA</div>
-            <div class="card-logo mastercard">MC</div>
-            <div class="card-logo amex">AMEX</div>
-            <div class="card-logo discover">DISC</div>
-            <div class="card-logo maestro">MAES</div>
-            <div class="card-logo diners">DIN</div>
-            <div class="card-logo jcb">JCB</div>
-            <div class="card-logo unionpay">UP</div>
+
+        <div class="sos-card-section">
+          <div class="sos-card-logos">
+            <div class="sos-card-logo visa">VISA</div>
+            <div class="sos-card-logo mastercard">MC</div>
+            <div class="sos-card-logo amex">AMEX</div>
+            <div class="sos-card-logo discover">DISC</div>
+            <div class="sos-card-logo maestro">MAES</div>
+            <div class="sos-card-logo diners">DIN</div>
+            <div class="sos-card-logo jcb">JCB</div>
+            <div class="sos-card-logo unionpay">UP</div>
           </div>
 
-          
-          <div class="card-number-wrapper">
-            <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="sos-card-number-wrapper">
+            <svg class="sos-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <rect x="1" y="4" width="22" height="16" rx="2" stroke-width="2"/>
               <line x1="1" y1="10" x2="23" y2="10" stroke-width="2"/>
             </svg>
-            <input type="text" class="card-number-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
-            <svg class="check-icon" id="cardCheck" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <input type="text" id="cardNumber" class="sos-card-number-input" placeholder="0000 0000 0000 0000" maxlength="19">
+            <svg id="cardCheck" class="sos-check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
           </div>
 
-          
-          <div class="card-details-row">
-            <div class="select-wrapper">
-              <select class="form-select" id="expMonth">
+          <div class="sos-card-details-row">
+            <div class="sos-select-wrapper">
+              <select id="expMonth" class="sos-form-select">
                 <option value="">Месяц</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -456,13 +93,13 @@
                 <option value="11">11</option>
                 <option value="12">12</option>
               </select>
-              <svg class="select-arrow" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="sos-select-arrow" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </div>
-            
-            <div class="select-wrapper">
-              <select class="form-select" id="expYear">
+
+            <div class="sos-select-wrapper">
+              <select id="expYear" class="sos-form-select">
                 <option value="">Год</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -475,21 +112,20 @@
                 <option value="2032">2032</option>
                 <option value="2033">2033</option>
               </select>
-              <svg class="select-arrow" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="sos-select-arrow" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </div>
-            
-            <div class="cvv-wrapper">
-              <input type="text" class="cvv-input" id="cvv" placeholder="CVV" maxlength="4">
-              <svg class="cvv-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            <div class="sos-cvv-wrapper">
+              <input type="text" id="cvv" class="sos-cvv-input" placeholder="CVV" maxlength="4">
+              <svg class="sos-cvv-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
             </div>
           </div>
 
-          
-          <div class="security-badge">
+          <div class="sos-security-badge">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
@@ -499,67 +135,51 @@
       </div>
 
       
-      <div class="form-group">
-        <label class="form-label">
-          Добавьте номер телефона <span class="required-badge">обязательно</span>
-        </label>
-        <input type="tel" class="form-input" value="+3725298507" required>
+      <div class="sos-form-group">
+        <label class="sos-form-label">Добавьте номер телефона <span class="sos-required-badge">обязательно</span></label>
+        <input type="tel" class="sos-form-input" value="+3725298507" required>
       </div>
 
       
-      <div class="form-group">
-        <label class="form-label">Добавьте номер страховки</label>
-        <input type="text" class="form-input" value="45445445454545454 PFZ">
+      <div class="sos-form-group">
+        <label class="sos-form-label">Добавьте номер страховки</label>
+        <input type="text" class="sos-form-input" value="45445445454545454 PFZ">
       </div>
 
-      
-      <button type="submit" class="submit-btn">Подтвердить</button>
+      <button type="submit" class="btn-sos-primary">Подтвердить</button>
     </form>
   </div>
 
   
-  <div class="toast" id="toast">Данные успешно сохранены!</div>
+  <div class="sos-toast" id="toast">Данные успешно сохранены!</div>
 
   <script>
     
-    document.getElementById('cardNumber').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      let formatted = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-      e.target.value = formatted.substring(0, 19);
-      
-      
-      const checkIcon = document.getElementById('cardCheck');
-      if (value.length === 16) {
-        checkIcon.classList.add('visible');
-      } else {
-        checkIcon.classList.remove('visible');
-      }
+    const cardInput = document.getElementById('cardNumber');
+    const cardCheck = document.getElementById('cardCheck');
+    cardInput.addEventListener('input', e => {
+      let val = e.target.value.replace(/\D/g,'').substring(0,16);
+      e.target.value = val.replace(/(\d{4})(?=\d)/g,'$1 ');
+      cardCheck.classList.toggle('visible', val.length === 16);
     });
 
     
-    document.getElementById('cvv').addEventListener('input', function(e) {
-      e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+    document.getElementById('cvv').addEventListener('input', e => {
+      e.target.value = e.target.value.replace(/\D/g,'').substring(0,4);
     });
 
     
-    document.getElementById('sosForm').addEventListener('submit', function(e) {
-      e.preventDefault(); 
+    document.getElementById('sosForm').addEventListener('submit', e => {
+      e.preventDefault();
       window.location.href = 'Slide_4.html';
     });
 
-    const menuBtn = document.querySelector(".menu-btn");
+    
+    const menuBtn = document.querySelector(".sos-menu-btn");
     const sidebar = document.getElementById("sidebar");
     const overlay = document.getElementById("overlay");
-
-    menuBtn.addEventListener("click", () => {
-      sidebar.classList.add("active");
-      overlay.classList.add("active");
-    });
-
-    overlay.addEventListener("click", () => {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
+    menuBtn.addEventListener('click', () => { sidebar.classList.add('active'); overlay.classList.add('active'); });
+    overlay.addEventListener('click', () => { sidebar.classList.remove('active'); overlay.classList.remove('active'); });
   </script>
 </body>
 </html>

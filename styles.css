@@ -1,0 +1,811 @@
+:root {
+  --sos-red: #dc2626;
+  --sos-red-dark: #b91c1c;
+  --sos-red-light: #d62828;
+  --sos-blue: #00547a;
+  --sos-blue-link: #007aff;
+  --sos-green: #1db954;
+  --sos-purple: #a06afc;
+  --sos-gray-box: #f0f0f0;
+  --sos-gray-light: #f8f9fa;
+  --sos-gray-border: #c7c7c7;
+  --sos-text: #111;
+  --sos-text-gray: #444;
+  --sos-text-muted: #555;
+  --sos-border-gray: #dcdcdc;
+  --sos-phone-bg: #ffffff;
+  --sos-page-bg: #f8f9fa;
+}
+
+
+.sos-page {
+  background: var(--sos-page-bg);
+  min-height: 100vh;
+  padding: 16px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+
+.phone-frame {
+  max-width: 400px;
+  margin: 0 auto;
+  background: var(--sos-phone-bg);
+  border-radius: 32px;
+  padding: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+
+.sos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sos-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sos-red);
+}
+.sos-company-header{
+  font-weight: bold;
+}
+.sos-menu-btn {
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+}
+
+.sos-menu-btn:hover {
+  background: #f3f4f6;
+}
+
+.sos-menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+
+.sos-sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease;
+  z-index: 100;
+  padding: 20px;
+}
+
+.sos-select-wrapper {
+  position: relative;
+}
+
+.sos-form-select {
+  width: 100%;
+  height: 44px;
+  padding: 0 32px 0 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+}
+
+.sos-form-select:focus {
+  outline: none;
+  border-color: var(--sos-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.sos-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6b7280;
+}
+
+
+.sos-cvv-wrapper {
+  position: relative;
+}
+
+.sos-cvv-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+.sos-sidebar.active {
+  right: 0;
+}
+
+.sos-sidebar h4 {
+  margin-bottom: 20px;
+  color: var(--sos-red);
+}
+
+.sos-sidebar a {
+  display: block;
+  padding: 10px 0;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+}
+
+.sos-sidebar a:hover {
+  background: #f3f4f6;
+}
+
+
+.sos-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 50;
+}
+
+.sos-overlay.active {
+  display: block;
+}
+
+
+.btn-sos-primary {
+  background: var(--sos-red);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+}
+
+.btn-sos-primary:hover {
+  background: var(--sos-red-dark);
+}
+
+.btn-sos-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-sos-secondary {
+  background: var(--sos-blue);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-sos-link {
+  color: var(--sos-blue-link);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.btn-sos-purple {
+  background: var(--sos-purple);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-sos-purple:active {
+  transform: scale(0.98);
+}
+
+
+.sos-form-group {
+  position: relative; 
+  margin-bottom: 20px;
+}
+
+.sos-form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.sos-required-badge {
+  font-size: 11px;
+  color: var(--sos-red);
+  background: #fef2f2;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+.sos-form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.sos-form-input:focus {
+  outline: none;
+  border-color: var(--sos-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.sos-pay-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.sos-pay-select {
+  width: 100%;
+  height: 44px;
+  padding-left: 40px; 
+  padding-right: 32px; 
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><polygon points="4,6 12,6 8,11" fill="red"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 12px;
+}
+
+.sos-pay-select:focus {
+  outline: none;
+  border-color: var(--sos-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+
+.sos-service-list {
+  background-color: var(--sos-gray-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.sos-service-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background: var(--sos-gray-box);
+  border-bottom: 1px solid #ddd;
+}
+
+.sos-service-item:last-child {
+  border-bottom: none;
+}
+
+.sos-service-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--sos-red);
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  background: white;
+  flex-shrink: 0;
+}
+
+.sos-service-item input[type="checkbox"]:checked {
+  background-color: var(--sos-red);
+  border-color: var(--sos-red);
+}
+
+.sos-service-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+.sos-check-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 15px;
+  color: var(--sos-text-muted);
+}
+
+.sos-check-line input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  border: 2px solid #7d7dff;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  flex-shrink: 0;
+}
+
+.sos-check-line input[type="checkbox"]:checked {
+  background: #7d7dff;
+  border-color: #7d7dff;
+}
+
+.sos-check-line input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;  
+  top: 2px;   
+  width: 6px; 
+  height: 12px; 
+  border: solid white;
+  border-width: 0 2px 2px 0; 
+  transform: rotate(45deg);
+}
+
+
+.sos-field-box {
+  background: var(--sos-gray-box);
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+}
+
+.sos-field-box label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--sos-text-gray);
+}
+
+.sos-field-box .text-value {
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+
+.sos-image-box {
+  background: var(--sos-gray-box);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.sos-image-box img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+
+.sos-company-card {
+  background: var(--sos-gray-box);
+  border-radius: 12px;
+  padding: 14px 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.sos-company-card .name {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.sos-company-card .meta {
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.sos-company-card .confirm-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  background: var(--sos-red);
+  color: #fff;
+  padding: 11px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sos-company-card .confirm-btn:hover {
+  background: var(--sos-red-dark);
+}
+
+
+.sos-card-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.sos-card-logos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.sos-card-logo {
+  width: 40px;
+  height: 26px;
+  background: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sos-card-logo.visa { color: #1a1f71; }
+.sos-card-logo.mastercard { color: #eb001b; }
+.sos-card-logo.amex { color: #006fcf; }
+.sos-card-logo.discover { color: #ff6000; }
+.sos-card-logo.maestro { color: #0099df; }
+.sos-card-logo.diners { color: #004a97; }
+.sos-card-logo.jcb { color: #0e4c96; }
+.sos-card-logo.unionpay { color: #e21836; }
+
+.sos-card-number-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.sos-card-number-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 44px 0 44px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.sos-card-number-input:focus {
+  outline: none;
+  border-color: var(--sos-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.sos-card-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+}
+
+.sos-check-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #22c55e;
+  display: none;
+}
+
+.sos-check-icon.visible {
+  display: block;
+}
+
+
+select {
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><polygon points="4,6 12,6 8,11" fill="red"/></svg>');
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  color:#555;
+}
+
+
+
+
+
+
+.sos-card-details-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sos-cvv-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 36px 0 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 4px;
+  text-align: center;
+  background: white;
+  box-sizing: border-box;
+}
+
+.sos-cvv-input:focus {
+  outline: none;
+  border-color: var(--sos-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+
+.sos-security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #166534;
+}
+
+.sos-security-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+.sos-info {
+  font-size: 15px;
+  line-height: 1.45;
+  margin-bottom: 18px;
+}
+
+.sos-info b {
+  font-size: 16px;
+}
+
+
+.sos-title {
+  margin: 6px 0 20px 0;
+  font-weight: 700;
+  color: var(--sos-red);
+  font-size: 20px;
+}
+
+
+.sos-divider {
+  margin: 20px 0;
+  text-align: center;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.sos-divider::before,
+.sos-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ccc;
+}
+
+.sos-divider span {
+  padding: 0 10px;
+  color: #777;
+}
+
+
+.btn-google {
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid var(--sos-border-gray);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btn-google img {
+  width: 22px;
+  margin-right: 10px;
+}
+
+.btn-telegram {
+  background: #28a3e1;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.btn-telegram img {
+  width: 22px;
+  margin-right: 8px;
+}
+
+.btn-facebook {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-facebook img {
+  width: 38px;
+}
+.call-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sos-green);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.call-button img {
+  width: 20px;
+  margin-right: 10px;
+}
+.call-button:active {
+  transform: translateY(1px);
+}
+
+.sos-map {
+  height: 180px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #e5e7eb;
+}
+
+.sos-coordinates {
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: right;
+  color: #333;
+}
+
+
+.sos-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #1f2937;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 1000;
+}
+
+.sos-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+
+.sos-address-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1.5px solid var(--sos-border-gray);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--sos-text-gray);
+  margin-bottom: 25px;
+
+}
+
+.sos-address-display svg {
+  stroke: var(--sos-red);
+  margin-top: 2px;
+}
+
+
+.sos-file-upload {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.sos-file-upload:hover {
+  border-color: var(--sos-red);
+}
+
+.sos-file-upload svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+.sos-mb-2 { margin-bottom: 8px; }
+.sos-mb-3 { margin-bottom: 16px; }
+.sos-mb-4 { margin-bottom: 24px; }
+.sos-mt-3 { margin-top: 16px; }
+.sos-mt-4 { margin-top: 24px; }
+.sos-text-muted { color: var(--sos-text-muted); }
+.sos-text-center { text-align: center; }
+.sos-w-100 { width: 100%; }

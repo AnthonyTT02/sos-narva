@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva - Регистрация поставщика услуг</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sos-page">
+
+
+<div class="sos-sidebar" id="sidebar">
+  <h4>Меню</h4>
+  <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
+  <a href="#">Личный кабинет</a>
+  <a href="#">Настройки</a>
+  <a href="#">Условия пользования</a>
+  <a href="#">Правила безопасности</a>
+  <a href="#">Как начать работать</a>
+  <a href="#">— для юр. лиц</a>
+  <a href="#">— для физ. лиц</a>
+  <a href="#">Контакты</a>
+</div>
+<div class="sos-overlay" id="overlay"></div>
+
+<div class="phone-frame">
+
+  
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="sos-company-header" id="companyHeader">Multiweb OÜ &nbsp; 12102527</div>
+  <br>
+
+  <div class="sos-form-label" id="ownerLine">Владелец&nbsp;&nbsp;&nbsp;—</div>
+  <div class="sos-form-label" id="phoneLine">+—</div>
+  <div class="sos-form-label" id="emailLine">—</div>
+
+  <br>
+
+  <div class="sos-form-label" style="opacity:0.7; margin-bottom:8px;">Сотрудники:</div>
+
+  <form id="employeesForm">
+
+    <div id="employeesContainer">
+      
+      <div class="employee-block" style="margin-bottom: 12px;">
+        <div class="sos-form-group" style="margin-bottom:8px;">
+          <input type="text" class="sos-form-input employee-name" placeholder="Белозеров Максим" required>
+        </div>
+        <div class="sos-form-group">
+          <input type="tel" class="sos-form-input employee-phone" placeholder="+3725296507" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="sos-form-label" style="opacity:0.7; margin: 12px 0 8px;">Языки обслуживания</div>
+
+    <div id="langRow" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+      <button type="button" class="lang-btn" data-lang="RUS"
+              style="padding:8px 12px; border-radius:10px; border:1px solid #ddd; background:#fff;">
+        RUS
+      </button>
+      <button type="button" class="lang-btn" data-lang="EST"
+              style="padding:8px 12px; border-radius:10px; border:1px solid #ddd; background:#fff;">
+        EST
+      </button>
+      <button type="button" class="lang-btn" data-lang="ENG"
+              style="padding:8px 12px; border-radius:10px; border:1px solid #ddd; background:#fff;">
+        ENG
+      </button>
+      <button type="button" class="lang-btn" data-lang="FIN"
+              style="padding:8px 12px; border-radius:10px; border:1px solid #ddd; background:#fff;">
+        FIN
+      </button>
+    </div>
+
+    <div id="addEmployeeBtn"
+         style="display:flex; align-items:center; gap:10px; cursor:pointer; margin: 6px 0 14px;">
+      <div style="font-size:24px; line-height:20px;">+</div>
+      <div class="sos-form-label" style="text-decoration: underline; margin:0;">Добавить сотрудника</div>
+    </div>
+
+    <div class="sos-form-group" style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+      <input type="checkbox" id="confirmData" required style="width:22px; height:22px; accent-color:#e53935;">
+      <label for="confirmData" class="sos-form-label" style="text-decoration: underline; cursor:pointer; margin:0;">
+        Подтверждаю данные
+      </label>
+    </div>
+
+    <button type="submit" class="btn-sos-primary">Подтвердить</button>
+  </form>
+
+</div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+
+  menuBtn.onclick = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  };
+
+  overlay.onclick = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  
+  const company = JSON.parse(localStorage.getItem("providerCompany") || "{}");
+  if (company.companyName && company.regNumber) {
+    document.getElementById("companyHeader").textContent = `${company.companyName}  ${company.regNumber}`;
+  }
+
+ 
+  const owner = JSON.parse(localStorage.getItem("providerOwner") || "{}");
+  document.getElementById("ownerLine").innerHTML = `Владелец&nbsp;&nbsp;&nbsp;${owner.ownerName || "—"}`;
+  document.getElementById("phoneLine").textContent = owner.phone || "+—";
+  document.getElementById("emailLine").textContent = owner.email || "—";
+
+ 
+  const selectedLangs = new Set(["RUS", "EST", "ENG", "FIN"]);
+  const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
+
+  function renderLangButtons() {
+    langButtons.forEach(btn => {
+      const code = btn.dataset.lang;
+      const active = selectedLangs.has(code);
+      btn.style.border = active ? "1px solid #e53935" : "1px solid #ddd";
+      btn.style.color = active ? "#e53935" : "#111";
+      btn.style.fontWeight = active ? "600" : "400";
+    });
+  }
+
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const code = btn.dataset.lang;
+      if (selectedLangs.has(code)) selectedLangs.delete(code);
+      else selectedLangs.add(code);
+      renderLangButtons();
+    });
+  });
+
+  renderLangButtons();
+
+  
+  document.getElementById("addEmployeeBtn").addEventListener("click", () => {
+    const container = document.getElementById("employeesContainer");
+
+    const block = document.createElement("div");
+    block.className = "employee-block";
+    block.style.marginBottom = "12px";
+
+    block.innerHTML = `
+      <div class="sos-form-group" style="margin-bottom:8px;">
+        <input type="text" class="sos-form-input employee-name" placeholder="Имя сотрудника" required>
+      </div>
+      <div class="sos-form-group">
+        <input type="tel" class="sos-form-input employee-phone" placeholder="+372..." required>
+      </div>
+    `;
+
+    container.appendChild(block);
+  });
+
+  
+  document.getElementById("employeesForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const blocks = Array.from(document.querySelectorAll(".employee-block"));
+    const employees = blocks.map(b => ({
+      name: b.querySelector(".employee-name").value.trim(),
+      phone: b.querySelector(".employee-phone").value.trim()
+    }));
+
+    const payload = {
+      employees,
+      langs: Array.from(selectedLangs),
+      ts: Date.now()
+    };
+
+    localStorage.setItem("providerEmployees", JSON.stringify(payload));
+
+    alert("Регистрация завершена!");
+    window.location.href = "index.html";
+  });
+</script>
+
+</body>
+</html>

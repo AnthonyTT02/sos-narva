@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOS Narva - Регистрация поставщика услуг</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sos-page">
+
+
+<div class="sos-sidebar" id="sidebar">
+  <h4>Меню</h4>
+  <a href="Provider_Reg_1.html">Регистрация поставщика услуг</a>
+  <a href="#">Личный кабинет</a>
+  <a href="#">Настройки</a>
+  <a href="#">Условия пользования</a>
+  <a href="#">Правила безопасности</a>
+  <a href="#">Как начать работать</a>
+  <a href="#">— для юр. лиц</a>
+  <a href="#">— для физ. лиц</a>
+  <a href="#">Контакты</a>
+</div>
+<div class="sos-overlay" id="overlay"></div>
+
+<div class="phone-frame">
+
+  
+  <div class="sos-header">
+    <a href="index.html" class="sos-logo">SOS Narva</a>
+    <button class="sos-menu-btn" id="menuBtn">
+      <svg class="sos-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 18h6"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="sos-company-header" id="companyHeader">Multiweb OÜ &nbsp; 12102527</div>
+  <br>
+
+  
+  <div class="sos-form-label" id="ownerLine">Владелец&nbsp;&nbsp;&nbsp;—</div>
+  <div class="sos-form-label" id="phoneLine">+—</div>
+  <div class="sos-form-label" id="emailLine">—</div>
+  <div class="sos-form-label" id="cardLine">Карта Master ****----</div>
+
+  <br>
+
+  
+  <a href="contract.html" class="sos-form-label" style="text-decoration: underline;">
+    Договор подключения к платформе SOS NARVA
+  </a>
+
+  <div class="sos-form-label" style="margin-top: 10px;">
+    Текст Текст Текст
+  </div>
+
+  <br>
+
+  
+  <form id="agreementForm">
+    <div class="sos-form-group" style="display:flex; align-items:center; gap:10px;">
+      <input type="checkbox" id="agree" required style="width:22px; height:22px; accent-color:#e53935;">
+      <label for="agree" class="sos-form-label" style="text-decoration: underline; cursor:pointer; margin:0;">
+        Согласен с договором
+      </label>
+    </div>
+
+    <button type="submit" class="btn-sos-primary">Подтвердить</button>
+  </form>
+
+</div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+
+  menuBtn.onclick = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  };
+
+  overlay.onclick = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  
+  const company = JSON.parse(localStorage.getItem("providerCompany") || "{}");
+  if (company.companyName && company.regNumber) {
+    document.getElementById("companyHeader").textContent = `${company.companyName}  ${company.regNumber}`;
+  }
+
+  
+  const owner = JSON.parse(localStorage.getItem("providerOwner") || "{}");
+  document.getElementById("ownerLine").innerHTML = `Владелец&nbsp;&nbsp;&nbsp;${owner.ownerName || "—"}`;
+  document.getElementById("phoneLine").textContent = owner.phone || "+—";
+  document.getElementById("emailLine").textContent = owner.email || "—";
+
+  
+  const payment = JSON.parse(localStorage.getItem("providerPayment") || "{}");
+  const digits = (payment.cardNumber || "").replace(/\D/g, "");
+  const last4 = digits.length >= 4 ? digits.slice(-4) : "----";
+  document.getElementById("cardLine").textContent = `Карта Master ****${last4}`;
+
+  document.getElementById("agreementForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    localStorage.setItem("providerAgreement", JSON.stringify({
+      agree: true,
+      ts: Date.now()
+    }));
+
+    window.location.href = "Provider_Reg_6.html";
+  });
+</script>
+
+</body>
+</html>
