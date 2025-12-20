@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SOS Narva - Экстренная помощь на дороге</title>
   <link rel="stylesheet" href="styles.css">
+
+  
+  <link rel="manifest" href="/sos-narva/manifest.webmanifest">
+  <link rel="icon" href="/sos-narva/icon-32.png">
+  <link rel="apple-touch-icon" href="/sos-narva/icon-180.png">
+  <meta name="theme-color" content="#e53935">
 </head>
 <body class="sos-page">
 
@@ -59,6 +65,13 @@
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
   };
+</script>
+
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sos-narva/sw.js");
+  }
 </script>
 
 </body>
