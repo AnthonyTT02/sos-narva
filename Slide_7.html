@@ -26,7 +26,7 @@
     <div class="text-value">Эвакуатор</div>
     <div class="text-value">Местоположение: <span id="address">Загрузка адреса...</span></div>
     <div class="text-value">Страховой полис: 454545454545454545 PFZ</div>
-    <div class="text-value">Оплата картой: Master ********4330</div>
+    <div class="text-value" id="paymentLine" style="color:#e53935; font-weight:bold;"></div>
   </div>
 
   
@@ -80,6 +80,17 @@
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
   });
+
+  const paymentType = localStorage.getItem("paymentType");
+  const paymentLine = document.getElementById("paymentLine");
+
+  if (paymentType === "cash") {
+   paymentLine.textContent = "Оплата на месте наличными";
+  } else if (paymentType === "card") {
+   paymentLine.textContent = "Оплата картой: Master ******* 4330";
+  } else {
+   paymentLine.textContent = "Способ оплаты не выбран";
+  }
 </script>
 
 </body>
