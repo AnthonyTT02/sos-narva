@@ -57,11 +57,12 @@
     </div>
 
     <div class="sos-field-box">
-      <label>Оплата картой:</label>
-      <div class="text-value">Master ******* 4330</div>
+      <label>Оплата картой:
+        Master ******* 4330
+      </label>
     </div>
 
-    <button class="btn-sos-primary" onclick="location.href='Slide_5.html'">
+    <button class="btn-sos-primary" onclick="goWithCard()">
       <img src="emergency.svg" alt="emergency" style="width:24px; margin-right:8px; transform: translateY(4px);">
       ОТПРАВИТЬ ЗАПРОС
     </button>
@@ -87,6 +88,12 @@
       sidebar.classList.remove("active");
       overlay.classList.remove("active");
     });
+
+    function goWithCard() {
+      localStorage.setItem("paymentType", "card");
+      localStorage.setItem("cardInfo", "Master ******* 4330");
+      window.location.href = "Slide_5.html";
+    }
   </script>
 
 </body>
